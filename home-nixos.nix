@@ -2,6 +2,7 @@
   # ── NixOS-only packages ───────────────────────────────────
   home.packages = with pkgs; [
     firefox
+    code-cursor
     # add any Linux-only packages here (e.g. desktop apps)
   ];
 
