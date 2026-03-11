@@ -7,8 +7,7 @@
     texstudio
 
     # ── Lean / formal methods ─────────────────────────────
-    elan          # lean version manager
-    lean4
+    elan          # lean version manager (provides lean)
     opam
 
     # ── Python ────────────────────────────────────────────
@@ -61,7 +60,7 @@
   # ── Git (customize these) ─────────────────────────────────
   programs.git = {
     enable = true;
-    userName = "Arnav Dandu";
-    userEmail = "arnavdandu@gmail.com";
+    settings.user.name = "Arnav Dandu";
+    settings.user.email = "arnavdandu@gmail.com";
   };
 }
