@@ -1,9 +1,31 @@
 { pkgs, ... }: {
-  home.stateVersion = "24.11";
-  home.packages = with pkgs; [
-    texliveFull
-    lean4
-  ];
+    home.stateVersion = "24.11";
+    home.packages = with pkgs; [
+        texliveFull
+        lean4
+        opam
+        # CLI tools
+        ripgrep
+        fd
+        fzf
+        btop
+        coreutils
+        wget
+        rsync
+        fortune
+        yt-dlp
+        gh
+        git
+        cmake
+        # dev tools
+        deno
+        pyenv
+        emacs
+        # misc
+        graphviz
+        tesseract
+        ffmpeg  # if you use it, covers many of the media libs
+    ];
   programs.fish = {
     enable = true;
     functions = {
@@ -17,4 +39,13 @@
       '';
     };
   };
+  # in home.nix
+  xdg.configFile."ghostty/config".text = ''
+    font-family = JetBrains Mono
+    font-size = 14
+    theme = Catppuccin Mocha
+    macos-option-as-alt = true
+    command = /opt/homebrew/bin/fish
+    keybind = global:ctrl+opt+t=toggle_quick_terminal
+  '';
 }
