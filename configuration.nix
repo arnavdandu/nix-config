@@ -1,27 +1,52 @@
-{ pkgs, ... }: {
-  # THIS is the key line that was missing — declares your user at the system level
-  users.users.arnav = {
-    name = "arnav";
-    home = "/Users/arnav";
+{ config, lib, pkgs, ... }:
+
+{
+  imports = [];  # hardware-configuration.nix is imported via flake.nix
+
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "arnav-nix";
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "America/New_York";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # GNOME desktop
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # Audio
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  # User
+  users.users.arnav = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.fish;
+  };
 
-    environment.systemPackages = with pkgs; [
-    # nix tools
-    nixfmt            # nix formatter (the older standard one)
-    nil               # nix LSP for editor integration
-    nix-tree          # visualize nix store dependencies
-
-    # core system tools
-    fish
-    fzf 
-    git
-    curl
+  # System-level packages (NixOS-only stuff)
+  environment.systemPackages = with pkgs; [
+    nixfmt
+    nil
+    nix-tree
+    vim
     wget
-    ];
+    curl
+    gcc
+    gnumake
+  ];
+
   programs.fish.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = 5;
+  nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "25.11";
 }
