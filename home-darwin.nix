@@ -2,6 +2,7 @@
   # ── macOS-only packages ───────────────────────────────────
   home.packages = with pkgs; [
     # add any Darwin-only packages here
+    tailscale
   ];
 
   # ── Ghostty (macOS) ──────────────────────────────────────
