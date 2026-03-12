@@ -57,7 +57,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrains Mono";
+      name = "MesloLGS Nerd Font";
       size = 14;
     };
     settings = {

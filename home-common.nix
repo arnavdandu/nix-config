@@ -35,6 +35,11 @@
     vscode
     emacs
 
+    # ── Zsh extras ───────────────────────────────────────
+    fzf
+    zsh-powerlevel10k
+    nerd-fonts.meslo-lg
+
     # ── Media / misc ──────────────────────────────────────
     graphviz
     tesseract
@@ -62,10 +67,25 @@
   # ── Zsh + Oh My Zsh ─────────────────────────────────────────
   programs.zsh = {
     enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    initContent = ''
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+    '';
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "z" "sudo" ];
-      theme = "robbyrussell";
+      plugins = [
+        "git"
+        "z"
+        "sudo"
+        "docker"
+        "docker-compose"
+        "fzf"
+        "command-not-found"
+        "history-substring-search"
+        "colored-man-pages"
+      ];
     };
   };
 
