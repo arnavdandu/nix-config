@@ -10,7 +10,7 @@
   networking.hostName = "arnav-nix";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
 
   # GNOME desktop
