@@ -72,7 +72,19 @@
 
   system.stateVersion = "25.11";
 
-    # ── Tailscale ─────────────────────────────────────────────
+    # ── Syncthing ──────────────────────────────────────────────
+  services.syncthing = {
+    enable = true;
+    user = "arnav";
+    dataDir = "/home/arnav";
+    configDir = "/home/arnav/.config/syncthing";
+    openDefaultPorts = true; # opens 22000/tcp and 21027/udp
+  };
+
+  # ── Wake-on-LAN ────────────────────────────────────────────
+  networking.interfaces.enp6s0.wakeOnLan.enable = true;
+
+  # ── Tailscale ─────────────────────────────────────────────
   services.tailscale.enable = true;
 
   # ── SSH ───────────────────────────────────────────────────
