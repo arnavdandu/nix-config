@@ -96,7 +96,7 @@
           devices = [ "macbook" ];
         };
         "documents" = {
-          path = "/home/arnav/documents";
+          path = "/home/arnav/Documents";
           devices = [ "macbook" ];
         };
       };
