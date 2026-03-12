@@ -94,6 +94,11 @@
         "research" = {
           path = "/home/arnav/research";
           devices = [ "macbook" ];
+          ignorePatterns = [
+            ".lake"
+            "lake-packages"
+            "build"
+          ];
         };
         "documents" = {
           path = "/home/arnav/Documents";
