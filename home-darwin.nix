@@ -5,6 +5,9 @@
     tailscale
   ];
 
+  # ── Syncthing ────────────────────────────────────────────
+  services.syncthing.enable = true;
+
   # ── Ghostty (macOS) ──────────────────────────────────────
   xdg.configFile."ghostty/config".text = ''
     font-family = JetBrains Mono
