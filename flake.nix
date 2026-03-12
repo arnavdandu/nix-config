@@ -3,13 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:nix-darwin/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, hyprland, ... }: {
 
     # ── macOS ──────────────────────────────────────────────
     darwinConfigurations."Arnavs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -21,7 +29,9 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "bak";
-          home-manager.users.arnav = { imports = [ ./home-common.nix ./home-darwin.nix ]; };
+          home-manager.users.arnav = {
+            imports = [ ./home-common.nix ./home-darwin.nix ];
+          };
         }
       ];
     };
@@ -29,15 +39,20 @@
     # ── NixOS ──────────────────────────────────────────────
     nixosConfigurations."arnav-nix" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = [
         ./nixos/configuration.nix
         ./nixos/hardware-configuration.nix
+
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "bak";
-          home-manager.users.arnav = { imports = [ ./home-common.nix ./home-nixos.nix ]; };
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.users.arnav = {
+            imports = [ ./home-common.nix ./home-nixos.nix ];
+          };
         }
       ];
     };
