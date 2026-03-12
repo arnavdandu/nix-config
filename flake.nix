@@ -43,6 +43,7 @@
       modules = [
         ./nixos/configuration.nix
         ./nixos/hardware-configuration.nix
+        ./nixos/nvidia.nix              # remove this line on non-NVIDIA machines
 
         home-manager.nixosModules.home-manager
         {
@@ -51,7 +52,7 @@
           home-manager.backupFileExtension = "bak";
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.users.arnav = {
-            imports = [ ./home-common.nix ./home-nixos.nix ];
+            imports = [ ./home-common.nix ./home-nixos.nix ./home-nvidia.nix ];  # remove home-nvidia.nix on non-NVIDIA machines
           };
         }
       ];

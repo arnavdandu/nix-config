@@ -5,7 +5,15 @@
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Auto-gc old generations
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   networking.hostName = "arnav-nix";
   networking.networkmanager.enable = true;

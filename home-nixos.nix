@@ -6,6 +6,10 @@
   home.packages = with pkgs; [
     firefox
     code-cursor
+    cliphist
+    wl-clipboard
+    hyprlock
+    hypridle
   ];
 
   # ── Ghostty (Linux) ──────────────────────────────────────
@@ -75,7 +79,7 @@
       bind = [
         "$mod, Return, exec, kitty"
         "$mod, Q, killactive,"
-        "$mod, M, exit,"
+        "$mod SHIFT, M, exit,"
         "$mod, V, togglefloating,"
         "$mod, D, exec, rofi -show drun -show-icons"
         "$mod, P, pseudo,"
@@ -123,6 +127,9 @@
         # Screenshot (region select → clipboard)
         ", Print, exec, grim -g \"$(slurp)\" - | wl-copy"
         "SHIFT, Print, exec, grim - | wl-copy"
+
+        # Clipboard history
+        "$mod, C, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
       ];
 
       # Mouse binds
@@ -131,12 +138,27 @@
         "$mod, mouse:273, resizewindow"
       ];
 
+      # ── Window rules ─────────────────────────────────────
+      windowrulev2 = [
+        "float, class:^(pavucontrol)$"
+        "float, class:^(nm-connection-editor)$"
+        "float, class:^(blueman-manager)$"
+        "float, title:^(Open File)$"
+        "float, title:^(Save File)$"
+        "float, title:^(Confirm to replace files)$"
+        "opacity 0.95, class:^(kitty)$"
+        "opacity 0.95, class:^(com.mitchellh.ghostty)$"
+      ];
+
       # ── Autostart ──────────────────────────────────────
       exec-once = [
         "swww-daemon"
         "waybar"
         "dunst"
         "nm-applet --indicator"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+        "hypridle"
       ];
     };
   };
