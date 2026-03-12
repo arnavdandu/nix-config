@@ -32,7 +32,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "bak";
           home-manager.users.arnav = {
-            imports = [ ./home-common.nix ./home-darwin.nix ];
+            imports = [ ./home-common.nix ./home-darwin.nix catppuccin.homeModules.catppuccin ];
           };
         }
       ];
