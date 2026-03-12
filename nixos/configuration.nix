@@ -95,6 +95,10 @@
           path = "/home/arnav/research";
           devices = [ "macbook" ];
         };
+        "documents" = {
+          path = "/home/arnav/documents";
+          devices = [ "macbook" ];
+        };
       };
     };
   };
