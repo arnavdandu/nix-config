@@ -65,7 +65,6 @@
           enabled = true;
           size = 5;
           passes = 3;
-          new_optimizations = true;
         };
         shadow = {
           enabled = true;

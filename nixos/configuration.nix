@@ -79,6 +79,24 @@
     dataDir = "/home/arnav";
     configDir = "/home/arnav/.config/syncthing";
     openDefaultPorts = true; # opens 22000/tcp and 21027/udp
+
+    settings = {
+      overrideDevices = true;
+      overrideFolders = true;
+
+      devices = {
+        "macbook" = {
+          id = "NKPKZ3N-NGH7GH7-YRRDO4A-R3D2IWD-2QBURSY-SV3RX2C-XPMTDY2-CKZSCAT";
+        };
+      };
+
+      folders = {
+        "research" = {
+          path = "/home/arnav/research";
+          devices = [ "macbook" ];
+        };
+      };
+    };
   };
 
   # ── Wake-on-LAN ────────────────────────────────────────────
