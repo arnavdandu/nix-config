@@ -76,11 +76,12 @@ Configuration shared across both machines lives in `home-common.nix`:
 - **CLI tools**: ripgrep, fd, fzf, btop, htop, gh, rsync, cmake
 - **Dev tools**: Python 3 (+ numpy/matplotlib), Lean/elan, opam, Deno, VS Code, Emacs
 - **LaTeX**: texliveFull, TeXstudio
-- **Media**: ffmpeg, yt-dlp, graphviz, tesseract, fortune
+- **Media**: ffmpeg, yt-dlp, graphviz, tesseract, fortune, Vesktop (Discord)
+- **Theming**: Catppuccin (Macchiato, pink accent) applied globally via [catppuccin/nix](https://github.com/catppuccin/nix)
 
 Platform-specific config is split into:
 - **`home-darwin.nix`** — Ghostty terminal config, Tailscale, macOS-only packages
-- **`home-nixos.nix`** — Hyprland, Kitty, GTK/icon theme, Firefox, Cursor, Wayland tools
+- **`home-nixos.nix`** — Hyprland, Kitty, GTK, Firefox, Nemo, Sioyek, Wayland tools
 
 ## Desktop Environment (NixOS)
 
@@ -98,7 +99,8 @@ The NixOS machine runs **Hyprland** (Wayland compositor) with **GNOME/GDM** avai
 | Screenshots | grim + slurp → wl-copy |
 | Clipboard history | cliphist |
 | Idle / Lock | hypridle + hyprlock |
-| Icons | Papirus-Dark |
+| File manager | Nemo |
+| PDF viewer | Sioyek (XCB wrapper for Wayland) |
 
 ### Hyprland Key Bindings
 
@@ -135,17 +137,12 @@ OpenSSH is enabled with hardened defaults:
 - Authorized key: ed25519 key for `arnavdandu@gmail.com`
 
 ### Syncthing
-Runs as the `arnav` user for file sync between Mac and desktop.
+Runs on both machines for file sync between Mac and desktop.
+- **NixOS**: system-level service (config in `configuration.nix`), syncs `research` and `documents` folders to macbook
+- **macOS**: home-manager service (config in `home-darwin.nix`)
 - Web UI: `http://127.0.0.1:8384`
 - Ports: 22000/tcp (sync), 21027/udp (discovery) — opened automatically
 - Config stored at `~/.config/syncthing`
-
-**Pairing with another device:**
-1. Open the Syncthing web UI on both machines
-2. On each machine, go to **Actions > Show ID** and copy the device ID
-3. On each machine, click **Add Remote Device** and paste the other machine's ID
-4. On the machine that has the folders, click **Add Folder**, set the path, and share with the other device
-5. Accept the folder share on the receiving device
 
 ### Wake-on-LAN
 Enabled on `enp6s0` (Ethernet). Requires WoL to also be enabled in BIOS/UEFI.
@@ -210,6 +207,9 @@ sudo nix-collect-garbage -d    # delete all old generations and GC
 nix store optimise              # deduplicate the store
 ```
 
+### Audio (NixOS)
+PipeWire is the audio stack, with PulseAudio compatibility and ALSA support enabled.
+
 ## Notes
 
 - `hardware-configuration.nix` is machine-specific and auto-generated — keep it in the repo for reproducibility
@@ -217,3 +217,4 @@ nix store optimise              # deduplicate the store
 - Hyprland binary cache (`hyprland.cachix.org`) is configured on NixOS to speed up builds
 - `programs.nix-ld` is enabled on NixOS to support dynamically linked binaries (e.g., Claude Code VS Code extension)
 - macOS uses Ghostty as terminal; NixOS uses Kitty
+- Catppuccin theming is applied globally via the [catppuccin/nix](https://github.com/catppuccin/nix) flake input
