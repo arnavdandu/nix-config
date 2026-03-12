@@ -31,8 +31,24 @@
     gnome-tweaks
     gnome-software
     gnomeExtensions.blur-my-shell
-    nemo
+    nemo-with-extensions
+    cinnamon-desktop
+    cinnamon-gsettings-overrides
+    flameshot
   ];
+
+  # ── Session env (expose cinnamon schemas for Nemo) ──────
+  home.sessionVariables = {
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:${pkgs.cinnamon-desktop}/share/gsettings-schemas/${pkgs.cinnamon-desktop.name}";
+  };
+
+  # ── dconf ───────────────────────────────────────────────
+  dconf.settings = {
+    "org/cinnamon/desktop/default-applications/terminal" = {
+      exec = "kitty";
+      exec-arg = "";
+    };
+  };
 
   # ── GTK ─────────────────────────────────────────────────
   gtk.enable = true;

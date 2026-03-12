@@ -59,6 +59,16 @@
     };
   };
 
+  # ── Zsh + Oh My Zsh ─────────────────────────────────────────
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "z" "sudo" ];
+      theme = "robbyrussell";
+    };
+  };
+
   # ── Catppuccin ───────────────────────────────────────────────
   catppuccin = {
     enable = true;

@@ -51,10 +51,13 @@
     gcc
     gnumake
     pciutils
+    oils-for-unix
+    nushell
   ];
 
-  # fish
+  # shells
   programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   # Allow running dynamically linked binaries (e.g. Claude Code VS Code extension)
   programs.nix-ld.enable = true;
