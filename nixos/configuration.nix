@@ -45,6 +45,10 @@
   ];
 
   programs.fish.enable = true;
+
+  # Allow running dynamically linked binaries (e.g. Claude Code VS Code extension)
+  programs.nix-ld.enable = true;
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
