@@ -42,7 +42,7 @@ The NixOS machine runs **Hyprland** (Wayland compositor) with:
 - **Launcher**: Rofi
 - **Notifications**: Dunst
 - **Wallpaper**: swww
-- **Terminal**: Kitty / Ghostty (Catppuccin Mocha theme)
+- **Terminal**: Kitty (Catppuccin Mocha theme)
 - **Screenshots**: grim + slurp + wl-copy
 - **Clipboard history**: cliphist (Super + C to browse)
 - **Idle/lock**: hypridle + hyprlock
@@ -57,6 +57,7 @@ The NixOS machine runs **Hyprland** (Wayland compositor) with:
 | `Super + Shift + M` | Exit Hyprland |
 | `Super + V` | Toggle floating |
 | `Super + F` | Fullscreen |
+| `Super + S` | Toggle split |
 | `Super + C` | Clipboard history |
 | `Super + 1-9` | Switch workspace |
 | `Super + Shift + 1-9` | Move window to workspace |

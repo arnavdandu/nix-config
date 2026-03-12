@@ -10,15 +10,27 @@
     wl-clipboard
     hyprlock
     hypridle
+    grim
+    slurp
+    rofi-wayland
+    swww
+    waybar
+    dunst
+    networkmanagerapplet
   ];
 
-  # ── Ghostty (Linux) ──────────────────────────────────────
-  xdg.configFile."ghostty/config".text = ''
-    font-family = JetBrains Mono
-    font-size = 14
-    theme = Catppuccin Mocha
-    command = fish
-  '';
+  # ── Kitty ───────────────────────────────────────────────
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "JetBrains Mono";
+      size = 14;
+    };
+    themeFile = "Catppuccin-Mocha";
+    settings = {
+      shell = "fish";
+    };
+  };
 
   # ── Hyprland ─────────────────────────────────────────────
   wayland.windowManager.hyprland = {
@@ -77,13 +89,13 @@
 
       # ── Keybinds ───────────────────────────────────────
       bind = [
-        "$mod, Return, exec, ghostty"
+        "$mod, Return, exec, kitty"
         "$mod, Q, killactive,"
         "$mod SHIFT, M, exit,"
         "$mod, V, togglefloating,"
         "$mod, D, exec, rofi -show drun -show-icons"
         "$mod, P, pseudo,"
-        "$mod, J, togglesplit,"
+        "$mod, S, togglesplit,"
         "$mod, F, fullscreen,"
 
         # Move focus
@@ -139,15 +151,14 @@
       ];
 
       # ── Window rules ─────────────────────────────────────
-      windowrulev2 = [
+      windowrule = [
         "float, class:^(pavucontrol)$"
         "float, class:^(nm-connection-editor)$"
         "float, class:^(blueman-manager)$"
         "float, title:^(Open File)$"
         "float, title:^(Save File)$"
         "float, title:^(Confirm to replace files)$"
-        "opacity 0.95, class:^(com.mitchellh.ghostty)$"
-        "opacity 0.95, class:^(com.mitchellh.ghostty)$"
+        "opacity 0.95, class:^(kitty)$"
       ];
 
       # ── Autostart ──────────────────────────────────────
