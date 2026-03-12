@@ -12,12 +12,21 @@
     hypridle
     grim
     slurp
-    rofi-wayland
+    rofi
     swww
     waybar
     dunst
     networkmanagerapplet
   ];
+
+  # ── GTK / Icons ──────────────────────────────────────────
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
 
   # ── Kitty ───────────────────────────────────────────────
   programs.kitty = {
