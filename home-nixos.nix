@@ -17,6 +17,14 @@
     waybar
     dunst
     networkmanagerapplet
+    (pkgs.symlinkJoin {
+      name = "sioyek-xcb";
+      paths = [ pkgs.sioyek ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/sioyek --set QT_QPA_PLATFORM xcb
+      '';
+    })
   ];
 
   # ── GTK / Icons ──────────────────────────────────────────

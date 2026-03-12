@@ -41,7 +41,6 @@
     ffmpeg
     fortune
     yt-dlp
-    sioyek
   ];
 
   # ── Fish shell ────────────────────────────────────────────
