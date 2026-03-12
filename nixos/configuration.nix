@@ -71,4 +71,20 @@
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.11";
+
+    # ── Tailscale ─────────────────────────────────────────────
+  services.tailscale.enable = true;
+
+  # ── SSH ───────────────────────────────────────────────────
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
+  };
+
+  users.users.arnav.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBg6qrJhjOoUAY8vKEgRHZmaOiorllLgS9CNTanIoY0y arnavdandu@gmail.com"
+  ];
 }
