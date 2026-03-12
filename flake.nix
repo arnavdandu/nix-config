@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    catppuccin.url = "github:catppuccin/nix";
+
     hyprland.url = "github:hyprwm/Hyprland";
 
     nix-darwin = {
@@ -17,7 +19,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, hyprland, ... }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, ... }: {
 
     # ── macOS ──────────────────────────────────────────────
     darwinConfigurations."Arnavs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -52,7 +54,11 @@
           home-manager.backupFileExtension = "bak";
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.users.arnav = {
-            imports = [ ./home-common.nix ./home-nixos.nix ./home-nvidia.nix ];  # remove home-nvidia.nix on non-NVIDIA machines
+            imports = [ ./home-common.nix 
+                        ./home-nixos.nix 
+                        ./home-nvidia.nix 
+                        catppuccin.homeModules.catppuccin
+            ];  # remove home-nvidia.nix on non-NVIDIA machines
           };
         }
       ];

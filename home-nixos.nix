@@ -5,7 +5,6 @@
   # ── NixOS-only packages ───────────────────────────────────
   home.packages = with pkgs; [
     firefox
-    code-cursor
     cliphist
     wl-clipboard
     hyprlock
@@ -25,16 +24,18 @@
         wrapProgram $out/bin/sioyek --set QT_QPA_PLATFORM xcb
       '';
     })
+
+    # GNOME
+    gtk-engine-murrine
+    sassc
+    gnome-tweaks
+    gnome-software
+    gnomeExtensions.blur-my-shell
+    nemo
   ];
 
-  # ── GTK / Icons ──────────────────────────────────────────
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-  };
+  # ── GTK ─────────────────────────────────────────────────
+  gtk.enable = true;
 
   # ── Kitty ───────────────────────────────────────────────
   programs.kitty = {
@@ -43,7 +44,6 @@
       name = "JetBrains Mono";
       size = 14;
     };
-    themeFile = "Catppuccin-Mocha";
     settings = {
       shell = "fish";
     };

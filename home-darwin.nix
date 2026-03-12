@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     # add any Darwin-only packages here
     tailscale
-    sioyek
   ];
 
   # ── Syncthing ────────────────────────────────────────────

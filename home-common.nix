@@ -59,6 +59,13 @@
     };
   };
 
+  # ── Catppuccin ───────────────────────────────────────────────
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+    accent = "pink";
+  };
+
   # ── Git (customize these) ─────────────────────────────────
   programs.git = {
     enable = true;
