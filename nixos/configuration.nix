@@ -50,6 +50,7 @@
     curl
     gcc
     gnumake
+    pciutils
   ];
 
   # fish

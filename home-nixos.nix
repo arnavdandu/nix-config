@@ -77,7 +77,7 @@
 
       # ── Keybinds ───────────────────────────────────────
       bind = [
-        "$mod, Return, exec, kitty"
+        "$mod, Return, exec, ghostty"
         "$mod, Q, killactive,"
         "$mod SHIFT, M, exit,"
         "$mod, V, togglefloating,"
@@ -146,7 +146,7 @@
         "float, title:^(Open File)$"
         "float, title:^(Save File)$"
         "float, title:^(Confirm to replace files)$"
-        "opacity 0.95, class:^(kitty)$"
+        "opacity 0.95, class:^(com.mitchellh.ghostty)$"
         "opacity 0.95, class:^(com.mitchellh.ghostty)$"
       ];
 
