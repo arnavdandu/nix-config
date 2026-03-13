@@ -4,6 +4,22 @@ Arnav's multi-system Nix configuration — a single flake managing both a NixOS 
 
 ## Quick Start
 
+### Repair or reinstall from a standard NixOS live USB
+
+This is the easiest path if your machine is broken and you just want to boot into a normal NixOS live environment and re-apply this flake.
+
+1. Boot any standard NixOS installer/live ISO.
+2. Mount your existing root filesystem at `/mnt` and your EFI partition at `/mnt/boot`.
+3. Make this repo available in the live session, either by cloning it or copying it from another USB.
+4. Run:
+
+```bash
+chmod +x ./install-from-live.sh
+./install-from-live.sh
+```
+
+That script copies the repo to `/mnt/etc/nixos-config`, regenerates `nixos/hardware-configuration.nix` for the mounted system, and runs `nixos-install --flake /mnt/etc/nixos-config#arnav-nix`.
+
 ### Fresh NixOS install
 
 ```bash
@@ -17,6 +33,27 @@ sudo cp /etc/nixos/hardware-configuration.nix nixos/hardware-configuration.nix
 # 3. Build and switch
 sudo nixos-rebuild switch --flake .#arnav-nix
 ```
+
+### Venkey USB installer
+
+Build the installer ISO from this repo:
+
+```bash
+nix build .#venkey-installer-iso
+```
+
+The ISO will be available at `./result/iso/venkey-arnav-installer.iso`. Flash it to the Venkey USB, boot from it, partition and mount the target disk at `/mnt` (with the EFI partition at `/mnt/boot`), then run:
+
+```bash
+install-arnav-nixos
+```
+
+That command:
+- copies this repo from the live USB to `/mnt/etc/nixos-config`
+- regenerates `nixos/hardware-configuration.nix` for the target machine
+- runs `nixos-install --flake /mnt/etc/nixos-config#arnav-nix`
+
+If the target machine is not NVIDIA-based, remove the `nixos/nvidia.nix` and `home-nvidia.nix` imports in `/mnt/etc/nixos-config/flake.nix` before running the installer command.
 
 ### Fresh macOS install
 

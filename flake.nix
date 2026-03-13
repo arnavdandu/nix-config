@@ -24,7 +24,8 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, solaar, ... }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, solaar, ... }:
+  rec {
 
     # ── macOS ──────────────────────────────────────────────
     darwinConfigurations."Arnavs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -69,5 +70,16 @@
         }
       ];
     };
+
+    nixosConfigurations."venkey-installer" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs self; };
+      modules = [
+        ./nixos/installer.nix
+      ];
+    };
+
+    packages.x86_64-linux.venkey-installer-iso =
+      nixosConfigurations."venkey-installer".config.system.build.isoImage;
   };
 }
