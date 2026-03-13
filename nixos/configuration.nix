@@ -65,6 +65,10 @@
   # hyprland
   programs.hyprland.enable = true;
 
+  # Logitech device manager
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;  # solaar GUI
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [ "https://hyprland.cachix.org" ];
