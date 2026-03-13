@@ -36,7 +36,6 @@
     emacs
 
     # ── Zsh extras ───────────────────────────────────────
-    fzf
     zsh-powerlevel10k
     nerd-fonts.meslo-lg
 
