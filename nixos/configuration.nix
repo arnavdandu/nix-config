@@ -71,6 +71,15 @@
     trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
   
+  # ── CJK fonts ──────────────────────────────────────────────
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-color-emoji
+    dejavu_fonts
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.11";

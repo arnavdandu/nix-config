@@ -29,6 +29,7 @@
     gh
     git
     cmake
+    fastfetch
 
     # ── Dev tools ─────────────────────────────────────────
     deno
@@ -92,7 +93,7 @@
   catppuccin = {
     enable = true;
     flavor = "macchiato";
-    accent = "pink";
+    accent = "mauve";
   };
 
   # ── Git (customize these) ─────────────────────────────────
@@ -100,5 +101,24 @@
     enable = true;
     settings.user.name = "Arnav Dandu";
     settings.user.email = "arnavdandu@gmail.com";
+  };
+
+  # ── Tmux ─────────────────────────────────────────────────
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+    baseIndex = 1;
+    terminal = "tmux-256color";
+    historyLimit = 10000;
+    escapeTime = 0;
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      resurrect
+      continuum
+    ];
+    extraConfig = ''
+      set -g @continuum-restore 'on'
+      set -g @continuum-save-interval '15'
+    '';
   };
 }
