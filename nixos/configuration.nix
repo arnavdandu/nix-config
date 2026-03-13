@@ -53,6 +53,8 @@
     pciutils
     oils-for-unix
     nushell
+    vesktop
+    efibootmgr
   ];
 
   # shells
@@ -65,12 +67,24 @@
   # hyprland
   programs.hyprland.enable = true;
 
+  # Logitech device manager (via Solaar flake)
+  services.solaar.enable = true;
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
   
+  # ── CJK fonts ──────────────────────────────────────────────
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-color-emoji
+    dejavu_fonts
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.11";
