@@ -8,6 +8,11 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
+    solaar = {
+      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +24,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, ... }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, solaar, ... }: {
 
     # ── macOS ──────────────────────────────────────────────
     darwinConfigurations."Arnavs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -46,6 +51,7 @@
         ./nixos/configuration.nix
         ./nixos/hardware-configuration.nix
         ./nixos/nvidia.nix              # remove this line on non-NVIDIA machines
+        solaar.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {
