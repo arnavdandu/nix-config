@@ -25,6 +25,19 @@
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, solaar, ... }:
+  let
+    username = "arnav";
+    homeBackupExtension = "bak";
+    mkHomeManagerModule = { imports, extraSpecialArgs ? {} }: {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = homeBackupExtension;
+      home-manager.extraSpecialArgs = extraSpecialArgs;
+      home-manager.users.${username} = {
+        inherit imports;
+      };
+    };
+  in
   rec {
 
     # ── macOS ──────────────────────────────────────────────
@@ -33,14 +46,9 @@
       modules = [
         ./darwin.nix
         home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "bak";
-          home-manager.users.arnav = {
-            imports = [ ./home-common.nix ./home-darwin.nix catppuccin.homeModules.catppuccin ];
-          };
-        }
+        (mkHomeManagerModule {
+          imports = [ ./home-common.nix ./home-darwin.nix catppuccin.homeModules.catppuccin ];
+        })
       ];
     };
 
@@ -55,19 +63,15 @@
         solaar.nixosModules.default
 
         home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "bak";
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.arnav = {
-            imports = [ ./home-common.nix 
-                        ./home-nixos.nix 
-                        ./home-nvidia.nix 
-                        catppuccin.homeModules.catppuccin
-            ];  # remove home-nvidia.nix on non-NVIDIA machines
-          };
-        }
+        (mkHomeManagerModule {
+          extraSpecialArgs = { inherit inputs; };
+          imports = [
+            ./home-common.nix
+            ./home-nixos.nix
+            ./home-nvidia.nix  # remove this line on non-NVIDIA machines
+            catppuccin.homeModules.catppuccin
+          ];
+        })
       ];
     };
 
@@ -81,5 +85,20 @@
 
     packages.x86_64-linux.venkey-installer-iso =
       nixosConfigurations."venkey-installer".config.system.build.isoImage;
+
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
+
+    devShells.x86_64-linux.default =
+      let
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      in
+      pkgs.mkShell {
+        packages = with pkgs; [
+          nil
+          nixfmt-rfc-style
+        ];
+      };
   };
 }

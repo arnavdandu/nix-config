@@ -25,7 +25,7 @@ That script copies the repo to `/mnt/etc/nixos-config`, regenerates `nixos/hardw
 ```bash
 # 1. Clone the repo
 git clone https://github.com/arnavdandu/nix-config.git
-cd nix-config/nixos
+cd nix-config
 
 # 2. Copy your hardware config (generated during NixOS install)
 sudo cp /etc/nixos/hardware-configuration.nix nixos/hardware-configuration.nix
@@ -63,7 +63,7 @@ sh <(curl -L https://nixos.org/nix/install)
 
 # 2. Clone the repo
 git clone https://github.com/arnavdandu/nix-config.git
-cd nix-config/nixos
+cd nix-config
 
 # 3. Build and switch
 darwin-rebuild switch --flake .#Arnavs-MacBook-Pro
@@ -81,6 +81,21 @@ nix flake update
 
 # Garbage collect old generations
 sudo nix-collect-garbage -d
+```
+
+### Tooling for local checks
+
+This flake exposes formatter and dev-shell outputs so check tooling is reproducible:
+
+```bash
+# Enter a shell with nixfmt + nil
+nix develop .#default
+
+# Format all Nix files with the flake formatter
+nix fmt
+
+# Evaluate flake outputs
+nix flake check --no-build
 ```
 
 ## Hosts
