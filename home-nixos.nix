@@ -5,6 +5,7 @@
   # ── NixOS-only packages ───────────────────────────────────
   home.packages = with pkgs; [
     firefox
+    vscode
     cliphist
     wl-clipboard
     hyprlock
