@@ -63,6 +63,18 @@
 
   # Allow running dynamically linked binaries (e.g. Claude Code VS Code extension)
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    webkitgtk_4_1
+    gtk3
+    glib
+    glib-networking
+    libsoup_3
+    cairo
+    gdk-pixbuf
+    openssl
+    zlib
+    libayatana-appindicator
+  ];
 
   # hyprland
   programs.hyprland.enable = true;
