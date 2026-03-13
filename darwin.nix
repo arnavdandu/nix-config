@@ -4,6 +4,7 @@
     home = "/Users/arnav";
   };
 
+  system.primaryUser = "arnav";
   nixpkgs.config.allowUnfree = true;
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -20,5 +21,6 @@
 
   programs.fish.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   system.stateVersion = 5;
 }
