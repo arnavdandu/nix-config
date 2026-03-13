@@ -33,8 +33,6 @@
     gnome-software
     gnomeExtensions.blur-my-shell
     nemo-with-extensions
-    cinnamon-desktop
-    cinnamon-gsettings-overrides
     flameshot
   ];
 
