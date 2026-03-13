@@ -53,6 +53,8 @@
     pciutils
     oils-for-unix
     nushell
+    vesktop
+    efibootmgr
   ];
 
   # shells

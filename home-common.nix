@@ -46,7 +46,6 @@
     ffmpeg
     fortune
     yt-dlp
-    vesktop
   ];
 
   # ── Fish shell ────────────────────────────────────────────
