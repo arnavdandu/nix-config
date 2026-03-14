@@ -34,7 +34,7 @@
         wrapProgram $out/bin/sioyek --set QT_QPA_PLATFORM xcb
       '';
     })
-    deskflow 
+    deskflow
 
     # GNOME
     gtk-engine-murrine
@@ -57,10 +57,22 @@
       exec = "kitty";
       exec-arg = "";
     };
+    "org/gnome/desktop/interface" = {
+      cursor-theme = "Adwaita";
+      cursor-size = 24;
+    };
   };
 
   # ── GTK ─────────────────────────────────────────────────
   gtk.enable = true;
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+  };
 
   # ── Kitty ───────────────────────────────────────────────
   programs.kitty = {
