@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   home.stateVersion = "24.11";
 
@@ -56,6 +59,7 @@
     git
     cmake
     fastfetch
+    inputs.codex-cli-nix.packages.${system}.default
 
     # ── Dev tools ─────────────────────────────────────────
     deno
