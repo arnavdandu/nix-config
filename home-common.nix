@@ -10,6 +10,15 @@
     elan          # lean version manager (provides lean)
     opam
 
+    # ── Haskell ────────────────────────────────────────────
+    ghc
+    cabal-install
+    stack
+    haskell-language-server
+    ormolu
+    hlint
+    haskellPackages.hpack
+
     # ── Python ────────────────────────────────────────────
     python3
     python3Packages.pip
