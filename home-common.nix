@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -7,17 +8,33 @@
     texstudio
 
     # ── Lean / formal methods ─────────────────────────────
-    elan          # lean version manager (provides lean)
+    elan # lean version manager (provides lean)
     opam
 
     # ── Haskell ────────────────────────────────────────────
     ghc
     cabal-install
     stack
+    ghcid
     haskell-language-server
     ormolu
     hlint
+    haskellPackages.cabal-fmt
+    haskellPackages.cabal2nix
     haskellPackages.hpack
+    haskellPackages.implicit-hie
+
+    # ── Web dev ────────────────────────────────────────────
+    nodejs_22
+    pnpm
+    typescript
+    nodePackages.typescript-language-server
+    eslint
+    prettier
+    vscode-langservers-extracted
+    tailwindcss
+    esbuild
+    dart-sass
 
     # ── Python ────────────────────────────────────────────
     python3
