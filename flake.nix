@@ -22,9 +22,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, solaar, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, catppuccin, home-manager, hyprland, solaar, claude-code, ... }:
   let
     username = "arnav";
     homeBackupExtension = "bak";
@@ -57,6 +59,7 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
+        { nixpkgs.overlays = [ claude-code.overlays.default ]; }
         ./nixos/configuration.nix
         ./nixos/hardware-configuration.nix
         ./nixos/nvidia.nix              # remove this line on non-NVIDIA machines

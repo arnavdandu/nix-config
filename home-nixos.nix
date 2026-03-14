@@ -4,6 +4,9 @@
 {
   # ── NixOS-only packages ───────────────────────────────────
   home.packages = with pkgs; [
+    # AI
+    claude-code
+
     # Core
     firefox
     vscode
