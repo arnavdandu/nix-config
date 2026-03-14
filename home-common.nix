@@ -45,6 +45,7 @@
     ffmpeg
     fortune
     yt-dlp
+    jekyll
   ];
 
   # ── Fish shell ────────────────────────────────────────────
