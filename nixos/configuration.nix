@@ -97,22 +97,12 @@ in
   
   # ── CJK fonts ──────────────────────────────────────────────
   fonts.packages = with pkgs; [
-    sarasa-gothic
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     noto-fonts-color-emoji
     dejavu_fonts
   ];
-
-  fonts.fontconfig = {
-    defaultFonts = {
-      serif = [ "Sarasa UI CL" "Noto Serif" "Noto Serif CJK SC" ];
-      sansSerif = [ "Sarasa UI CL" "Noto Sans" "Noto Sans CJK SC" ];
-      monospace = [ "Sarasa Term CL" "Noto Sans Mono" "Noto Sans Mono CJK SC" ];
-      emoji = [ "Noto Color Emoji" ];
-    };
-  };
 
   nixpkgs.config.allowUnfree = true;
 
