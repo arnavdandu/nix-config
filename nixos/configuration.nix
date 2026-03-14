@@ -29,6 +29,9 @@ in
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # XFCE desktop (selectable from GDM login screen)
+  services.xserver.desktopManager.xfce.enable = true;
+
   # Audio
   services.pipewire = {
     enable = true;
