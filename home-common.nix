@@ -72,7 +72,6 @@
     fortune
     yt-dlp
     jekyll
-    celluloid
   ];
 
   # ── Fish shell ────────────────────────────────────────────

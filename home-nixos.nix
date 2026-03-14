@@ -4,8 +4,12 @@
 {
   # ── NixOS-only packages ───────────────────────────────────
   home.packages = with pkgs; [
+    # Core
     firefox
     vscode
+    celluloid
+
+    # QOL
     cliphist
     wl-clipboard
     hyprlock
