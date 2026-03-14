@@ -10,6 +10,8 @@
     # Core
     firefox
     vscode
+
+    # Media
     celluloid
 
     # QOL
@@ -32,6 +34,7 @@
         wrapProgram $out/bin/sioyek --set QT_QPA_PLATFORM xcb
       '';
     })
+    deskflow 
 
     # GNOME
     gtk-engine-murrine
