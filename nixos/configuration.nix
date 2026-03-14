@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  ccs = pkgs.callPackage ./pkgs/ccs.nix { };
+in
 {
   imports = [];  # hardware-configuration.nix is imported via flake.nix
 
@@ -55,6 +58,7 @@
     nushell
     vesktop
     efibootmgr
+    ccs
   ];
 
   # shells
